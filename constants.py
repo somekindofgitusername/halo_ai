@@ -1,10 +1,10 @@
 # Define feature and target columns once
 # natural
-#FEATURE_COLUMNS = ['orient_w', 'orient_x', 'orient_y', 'orient_z', 'eyedir_x', 'eyedir_y', 'eyedir_z', 'azimuth', 'altitude']
-
+#FEATURE_COLUMNS = ["orientw", "orientx", "orienty", "orientz","eyedirx", "eyediry", "eyedirz", "azimuth", "altitude"]
 #FEATURE_COLUMNS = ['eyedir_x', 'eyedir_y', 'eyedir_z', 'azimuth', 'altitude']
 
-FEATURE_COLUMNS = ['dot_eyedir_sundir', 'altitude']
+#FEATURE_COLUMNS = ['dot_eyedir_sundir','altitude']
+FEATURE_COLUMNS = ['sundirx', 'sundiry', 'sundirz','eyedirx', 'eyediry', 'eyedirz','altitude']
 
 #minimal
 #FEATURE_COLUMNS = ['eulerx', 'eulery', 'eulerz','dot_eyedir_sundir']
@@ -33,4 +33,7 @@ FEATURE_COLUMNS = ['dot_eyedir_sundir', 'altitude']
 
 
 
-TARGET_COLUMNS = ['color_red', 'color_green', 'color_blue']
+#TARGET_COLUMNS = ['color_red', 'color_green', 'color_blue']
+TARGET_COLUMNS = ['hsvx', 'hsvy', 'hsvz']
+
+#TARGET_COLUMNS = []

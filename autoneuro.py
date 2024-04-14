@@ -1,10 +1,20 @@
 # Imports grouped by functionality
+import tensorflow as tf
+
+# Set default float type to float16 for GPU efficiency
+#tf.keras.backend.set_floatx('float16')
+#from tensorflow.keras.mixed_precision import set_global_policy
+# Set default float type to mixed precision for GPU efficiency
+#set_global_policy('mixed_float16')
+#from tensorflow.keras.callbacks import TerminateOnNaN
+
+
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
 from sklearn.feature_selection import SelectFromModel
 from sklearn.ensemble import RandomForestClassifier  # or RandomForestRegressor if it's a regression problem
-
+from sklearn.preprocessing import MinMaxScaler
 
 from helper_functions import preprocess_and_feature_engineer
 from feature_selector import select_features_by_variance
