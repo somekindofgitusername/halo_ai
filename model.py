@@ -23,7 +23,7 @@ def build_model_alt(hp):
     model = Sequential()
     # Initial Dense layer to process the input features
     model.add(Dense(
-        units=hp.Int('initial_units', min_value=32, max_value=1024, step=64),
+        units=hp.Int('initial_units', min_value=32, max_value=512, step=32),
         activation=hp.Choice('initial_activation', ['relu', 'tanh', 'elu']),
         #activation = 'relu',  # Use ReLU activation for the initial layer
         kernel_initializer=HeNormal(),
@@ -32,12 +32,12 @@ def build_model_alt(hp):
     ))
 
     # Add hidden layers as before
-    for i in range(hp.Int('n_layers', 5, 5)):
+    for i in range(hp.Int('n_layers', 3, 5)):
         model.add(Dense(
-            units=hp.Int(f'layer_{i}_units', min_value=32, max_value=1024, step=64),
+            units=hp.Int(f'layer_{i}_units', min_value=32, max_value=512, step=32),
             activation=hp.Choice(f'layer_{i}_activation', ['relu', 'tanh', 'elu']),
         ))
-        model.add(Dropout(hp.Float(f'layer_{i}_dropout', min_value=0.1, max_value=0.6, step=0.05)))
+        model.add(Dropout(hp.Float(f'layer_{i}_dropout', min_value=0.01, max_value=0.5, step=0.1)))
 
     # Output layer for RGB components
     model.add(Dense(3, activation='linear'))  # Consider activation based on your color vector's range

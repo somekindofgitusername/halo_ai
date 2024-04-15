@@ -29,9 +29,9 @@ TUNER_PROMPT = "Select a tuner:\n1. RandomSearch\n2. Hyperband\n3. BayesianOptim
 DATA_PERCENTAGE_PROMPT = "Enter the percentage of data to use (1-100): "
 INVALID_INPUT_MESSAGE = "Invalid input. Defaulting to treating color components as separate features."
 INVALID_PERCENTAGE_MESSAGE = "Percentage must be between 1 and 100. Using 100% of the data."
+#FILE_PATH = "attributes_test.csv"
 FILE_PATH = "attributes.csv"
 OUTPUT_FILE_PATH = "attributes_preprocessed.csv"
-
 def get_user_choice(prompt, default, type_func=int, validation_func=None):
     """Prompt user for input and validate it."""
     while True:
@@ -57,14 +57,6 @@ def main():
     target = data[TARGET_COLUMNS]
     print("Features", features)
     print("Target", target)
-    
-    '''    # Feature selection
-    #selected_features = select_features_by_variance(data, FEATURE_COLUMNS)
-    selected_features = select_features_by_variance(data, features)
-    print("Selected features:", selected_features)
-    num_features = len(selected_features)   
-    print("Num (of selected) features:", num_features)
-    '''
     
     # Split the dataset
     X_train, X_test, y_train, y_test = train_test_split(features, target, test_size=0.2, random_state=42)

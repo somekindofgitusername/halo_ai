@@ -1,39 +1,45 @@
 # Define feature and target columns once
+'''
+    "altitude", 
+    "angle",
+    "avgx", "avgy", "avgz",
+    "avghsvx", "avghsvy", "avghsvz",
+    "avgxyzx", "avgxyzy", "avgxyzz",
+    "azimuth",
+    "Cdx", "Cdy", "Cdz",
+    "dot",
+    "dot_eyedir_sundir",
+    "eulerx", "eulery", "eulerz",
+    "eyedirx", "eyediry", "eyedirz",
+    "frame",
+    "height",
+    "height",
+    "hsvx", "hsvy", "hsvz",
+    "orientw", "orientx", "orienty", "orientz",
+    "qdot",
+    "sundirx", "sundiry", "sundirz",
+    "xyzx", "xyzy", "xyzz"  
+'''
+
 # natural
 #FEATURE_COLUMNS = ["orientw", "orientx", "orienty", "orientz","eyedirx", "eyediry", "eyedirz", "azimuth", "altitude"]
 #FEATURE_COLUMNS = ['eyedir_x', 'eyedir_y', 'eyedir_z', 'azimuth', 'altitude']
 
 #FEATURE_COLUMNS = ['dot_eyedir_sundir','altitude']
-FEATURE_COLUMNS = ['sundirx', 'sundiry', 'sundirz','eyedirx', 'eyediry', 'eyedirz','altitude']
+#FEATURE_COLUMNS = ['sundirx', 'sundiry', 'sundirz','eyedirx', 'eyediry', 'eyedirz','altitude']
 
 #minimal
 #FEATURE_COLUMNS = ['eulerx', 'eulery', 'eulerz','dot_eyedir_sundir']
+#FEATURE_COLUMNS = ['dot_eyedir_sundir']
+    
+#FEATURE_COLUMNS = ["eyedirz","dot_eyedir_sundir"]
+FEATURE_COLUMNS = ["dot","dot_eyedir_sundir"]
 
-#maximal
-#FEATURE_COLUMNS = ['orient_w', 'orient_x', 'orient_y', 'orient_z', 'eyedir_x', 'eyedir_y', 'eyedir_z', 'eulerx', 'eulery','sundir_x', 'sundir_y','sundir_z','dot', 'qdot','eulerz','dot_eyedir_sundir', 'azimuth', 'altitude']
-
-#directional
-#FEATURE_COLUMNS = ['orient_w', 'orient_x', 'orient_y', 'orient_z', 'eyedir_x', 'eyedir_y','eyedir_z', 'sundir_x', 'sundir_y','sundir_z']
-
-#thoughtfull:
-#FEATURE_COLUMNS = ['eulerx', 'eulery', 'eulerz', 'azimuth', 'altitude']
-
-# natural thoughtful
-#FEATURE_COLUMNS = ['eulerx', 'eulery', 'eulerz', 'eyedir_x', 'eyedir_y', 'eyedir_z', 'azimuth', 'altitude']
-
-
-
-
-#FEATURE_COLUMNS = ['orient_w', 'orient_x', 'orient_y', 'orient_z', 'eyedir_x', 'eyedir_y', 'eyedir_z', 'azimuth', 'altitude', 'dot', 'qdot']
-#FEATURE_COLUMNS = ['orient_w', 'orient_x', 'orient_y', 'orient_z', 'eyedir_x', 'eyedir_y', 'eyedir_z', 'azimuth', 'altitude', 'qdot']
-#FEATURE_COLUMNS = ['azimuth', 'altitude', 'qdot']
-
-
-#FEATURE_COLUMNS = ['orient_w', 'orient_x', 'orient_y', 'orient_z', 'eyedir_x', 'eyedir_y', 'eyedir_z', 'height', 'azimuth', 'altitude','dot_eyedir_sundir']
-
-
-
-#TARGET_COLUMNS = ['color_red', 'color_green', 'color_blue']
-TARGET_COLUMNS = ['hsvx', 'hsvy', 'hsvz']
+TARGET_COLUMNS = ['Cdx', 'Cdy', 'Cdz']
+#TARGET_COLUMNS = ['hsvx', 'hsvy', 'hsvz']
+#TARGET_COLUMNS = ['xyzx', 'xyzy', 'xyzz']
+#TARGET_COLUMNS = ['avgx', 'avgy', 'avgz']
+#TARGET_COLUMNS = ['avghsvx', 'avghsvy', 'avghsvz']
+#TARGET_COLUMNS = ['avgxyzx', 'avgxyzy', 'avgxyzz']
 
 #TARGET_COLUMNS = []

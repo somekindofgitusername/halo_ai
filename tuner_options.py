@@ -25,7 +25,7 @@ def initialize_tuner(tuner_selection, build_model, directory='tuner_results', pr
         tuner = BayesianOptimization(
             build_model,
             objective='val_mean_absolute_error',
-            max_trials=30,
+            max_trials=10,
             executions_per_trial=1,
             directory=directory,
             project_name=f'{project_name}_bayesian',
