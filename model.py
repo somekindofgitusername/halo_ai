@@ -8,8 +8,8 @@ from tensorflow.keras import backend as K
 from tensorflow.keras.initializers import HeNormal
 
 from constants import FEATURE_COLUMNS, TARGET_COLUMNS
-from quaternion_eye_dir_layer import QuaternionEyeDirLayer
-from helper_functions import tf_r2_score
+#from quaternion_eye_dir_layer import QuaternionEyeDirLayer
+#from helper_functions import tf_r2_score
 
 # Model-building function with hyperparameters
 
@@ -17,7 +17,7 @@ from helper_functions import tf_r2_score
 # Initialize the Huber loss with a specific delta value
 huber_loss = tf.keras.losses.Huber(delta=1)  # Adjust delta as needed
 num_features = len(FEATURE_COLUMNS)  # Automatically updates based on defined feature columns
-
+num_targets = len(TARGET_COLUMNS)
 
 def build_model_alt(hp):
     model = Sequential()
@@ -32,7 +32,7 @@ def build_model_alt(hp):
     ))
 
     # Add hidden layers as before
-    for i in range(hp.Int('n_layers', 3, 5)):
+    for i in range(hp.Int('n_layers', 2, 5)):
         model.add(Dense(
             units=hp.Int(f'layer_{i}_units', min_value=32, max_value=512, step=32),
             activation=hp.Choice(f'layer_{i}_activation', ['relu', 'tanh', 'elu']),
@@ -40,7 +40,8 @@ def build_model_alt(hp):
         model.add(Dropout(hp.Float(f'layer_{i}_dropout', min_value=0.01, max_value=0.5, step=0.1)))
 
     # Output layer for RGB components
-    model.add(Dense(3, activation='linear'))  # Consider activation based on your color vector's range
+    #model.add(Dense(3, activation='linear'))  # Consider activation based on your color vector's range
+    model.add(Dense(num_targets, activation='linear'))  # Consider activation based on your color vector's range
 
     
     # Compile model
