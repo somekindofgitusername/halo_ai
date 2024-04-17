@@ -1,7 +1,10 @@
 from keras_tuner import RandomSearch, Hyperband, BayesianOptimization
 
 def initialize_tuner(tuner_selection, build_model, directory='tuner_results', project_name='model_tuning'):
+    tuner_selection = str(tuner_selection)
+    print(f"Using {tuner_selection} tuner.")
     if tuner_selection == "1":
+        print("RandomSearch")
         tuner = RandomSearch(
             build_model,
             objective='val_mean_absolute_error',
@@ -12,16 +15,18 @@ def initialize_tuner(tuner_selection, build_model, directory='tuner_results', pr
             overwrite=True
         )
     elif tuner_selection == "2":
+        print("Hyperband")
         tuner = Hyperband(
             build_model,
             objective='val_mean_absolute_error',
-            max_epochs=30,
+            max_epochs=20,
             factor=3,
             directory=directory,
             project_name=f'{project_name}_hyperband',
             overwrite=True
         )
     else:  # BayesianOptimization is the default
+        print("BayesianOptimization")
         tuner = BayesianOptimization(
             build_model,
             objective='val_mean_absolute_error',
