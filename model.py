@@ -32,7 +32,7 @@ def build_model_alt(hp):
     ))
 
     # Add hidden layers as before
-    for i in range(hp.Int('n_layers', 2, 5)):
+    for i in range(hp.Int('n_layers', 2, 6)): #base 2,5 layers
         model.add(Dense(
             units=hp.Int(f'layer_{i}_units', min_value=32, max_value=512, step=32),
             activation=hp.Choice(f'layer_{i}_activation', ['relu', 'tanh', 'elu']),

@@ -37,10 +37,10 @@ FEATURE_COLUMNS = ["eyedirz","dot_eyedir_sundir"]
 
 #TARGET_COLUMNS = ['Cdx','Cdy','Cdz']
 #TARGET_COLUMNS = ['hsvx']
-TARGET_COLUMNS = ['hsvx', 'hsvy', 'hsvz']
+#TARGET_COLUMNS = ['hsvx', 'hsvy', 'hsvz']
 #TARGET_COLUMNS = ['xyzx', 'xyzy', 'xyzz']
 #TARGET_COLUMNS = ['avgx', 'avgy', 'avgz']
-#TARGET_COLUMNS = ['avghsvx', 'avghsvy', 'avghsvz']
+TARGET_COLUMNS = ['avghsvx', 'avghsvy', 'avghsvz']
 #TARGET_COLUMNS = ['avgxyzx', 'avgxyzy', 'avgxyzz']
 
 #TARGET_COLUMNS = []

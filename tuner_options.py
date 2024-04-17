@@ -19,7 +19,7 @@ def initialize_tuner(tuner_selection, build_model, directory='tuner_results', pr
         tuner = Hyperband(
             build_model,
             objective='val_mean_absolute_error',
-            max_epochs=20,
+            max_epochs=30,
             factor=3,
             directory=directory,
             project_name=f'{project_name}_hyperband',
@@ -30,8 +30,8 @@ def initialize_tuner(tuner_selection, build_model, directory='tuner_results', pr
         tuner = BayesianOptimization(
             build_model,
             objective='val_mean_absolute_error',
-            max_trials=22,
-            executions_per_trial=3,
+            max_trials=50,
+            executions_per_trial=2,
             directory=directory,
             project_name=f'{project_name}_bayesian',
             overwrite=True
