@@ -32,16 +32,18 @@ def build_model_alt(hp):
     ))
 
     # Add hidden layers as before
-    for i in range(hp.Int('n_layers', 2, 6)): #base 2,5 layers
+    for i in range(hp.Int('n_layers', 2, 5)): #base 2,5 layers
         model.add(Dense(
             units=hp.Int(f'layer_{i}_units', min_value=32, max_value=512, step=32),
             activation=hp.Choice(f'layer_{i}_activation', ['relu', 'tanh', 'elu']),
+            kernel_initializer=HeNormal(),
+            kernel_regularizer=l2(0.01),
         ))
         model.add(Dropout(hp.Float(f'layer_{i}_dropout', min_value=0.01, max_value=0.5, step=0.1)))
 
     # Output layer for RGB components
     #model.add(Dense(3, activation='linear'))  # Consider activation based on your color vector's range
-    model.add(Dense(num_targets, activation='linear'))  # Consider activation based on your color vector's range
+    model.add(Dense(num_targets, activation='linear', kernel_initializer=HeNormal()))  # Consider activation based on your color vector's range
 
     
     # Compile model

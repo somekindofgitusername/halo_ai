@@ -7,6 +7,8 @@
     "avgxyzx", "avgxyzy", "avgxyzz",
     "azimuth",
     "Cdx", "Cdy", "Cdz",
+    "domx","domy","domz",
+    "domnormx","domnormy","domnormz",
     "dot",
     "dot_eyedir_sundir",
     "eulerx", "eulery", "eulerz",
@@ -32,15 +34,20 @@
 #FEATURE_COLUMNS = ['eulerx', 'eulery', 'eulerz','dot_eyedir_sundir']
 #FEATURE_COLUMNS = ['dot_eyedir_sundir']
     
-FEATURE_COLUMNS = ["eyedirz","dot_eyedir_sundir"]
+#FEATURE_COLUMNS = ["eyedirz","dot_eyedir_sundir"]
+FEATURE_COLUMNS = ["eyedirx","eyediry","eyedirz","dot_eyedir_sundir"]
 #FEATURE_COLUMNS = ["dot","dot_eyedir_sundir"]
+#FEATURE_COLUMNS = ["eyedirx", "eyediry", "eyedirz","sundirx", "sundiry", "sundirz"]
 
 #TARGET_COLUMNS = ['Cdx','Cdy','Cdz']
 #TARGET_COLUMNS = ['hsvx']
-#TARGET_COLUMNS = ['hsvx', 'hsvy', 'hsvz']
+TARGET_COLUMNS = ['hsvx', 'hsvy', 'hsvz']
+#TARGET_COLUMNS = ["domnormx","domnormy","domnormz"]
+#TARGET_COLUMNS = ["domx","domy","domz"]
+
 #TARGET_COLUMNS = ['xyzx', 'xyzy', 'xyzz']
 #TARGET_COLUMNS = ['avgx', 'avgy', 'avgz']
-TARGET_COLUMNS = ['avghsvx', 'avghsvy', 'avghsvz']
+#TARGET_COLUMNS = ['avghsvx', 'avghsvy', 'avghsvz']
 #TARGET_COLUMNS = ['avgxyzx', 'avgxyzy', 'avgxyzz']
 
 #TARGET_COLUMNS = []
