@@ -44,13 +44,24 @@ def build_model_alt(hp):
     # Output layer for RGB components
     #model.add(Dense(3, activation='linear'))  # Consider activation based on your color vector's range
     model.add(Dense(num_targets, activation='linear', kernel_initializer=HeNormal()))  # Consider activation based on your color vector's range
-
+    
+    # Hyperparameter tuning for Huber loss delta
+    huber_delta = hp.Float('huber_delta', min_value=0.5, max_value=2.0, step=0.1)
+    huber_loss = tf.keras.losses.Huber(delta=huber_delta)
     
     # Compile model
     model.compile(optimizer=Adam(hp.Float('learning_rate', min_value=1e-4, max_value=1e-2, sampling='LOG')),
                   #loss=custom_loss,  # Custom loss function
                   #loss='huber_loss',  # Huber loss with delta=1
-                  loss = tf.keras.losses.Huber(delta=2),
+                  #loss = tf.keras.losses.Huber(delta=1),
+                  loss = huber_loss,
+                  #loss='mean_squared_error',
+                  #loss='mean_absolute_error',
+                  #loss='binary_crossentropy',# nicely blue
+                  #loss='categorical_crossentropy',
+                  #loss='sparse_categorical_crossentropy',# bad
+                  #loss='cosine_similarity',
+                  #loss='poisson',
                   #metrics=['mean_absolute_error', tf_r2_score]
                   metrics=['mean_absolute_error', 'mean_squared_error'] 
                   )
