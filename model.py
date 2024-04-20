@@ -23,7 +23,7 @@ def build_model_alt(hp):
     model = Sequential()
     # Initial Dense layer to process the input features
     model.add(Dense(
-        units=hp.Int('initial_units', min_value=32, max_value=512, step=32),
+        units=hp.Int('initial_units', min_value=32, max_value=1024, step=32),
         activation=hp.Choice('initial_activation', ['relu', 'tanh', 'elu']),
         #activation = 'relu',  # Use ReLU activation for the initial layer
         kernel_initializer=HeNormal(),
@@ -32,9 +32,9 @@ def build_model_alt(hp):
     ))
 
     # Add hidden layers as before
-    for i in range(hp.Int('n_layers', 2, 5)): #base 2,5 layers
+    for i in range(hp.Int('n_layers', 2, 15)): #base 2,5 layers
         model.add(Dense(
-            units=hp.Int(f'layer_{i}_units', min_value=32, max_value=512, step=32),
+            units=hp.Int(f'layer_{i}_units', min_value=32, max_value=1024, step=32),
             activation=hp.Choice(f'layer_{i}_activation', ['relu', 'tanh', 'elu']),
             kernel_initializer=HeNormal(),
             kernel_regularizer=l2(0.01),
@@ -53,8 +53,8 @@ def build_model_alt(hp):
     model.compile(optimizer=Adam(hp.Float('learning_rate', min_value=1e-4, max_value=1e-2, sampling='LOG')),
                   #loss=custom_loss,  # Custom loss function
                   #loss='huber_loss',  # Huber loss with delta=1
-                  #loss = tf.keras.losses.Huber(delta=1),
-                  loss = huber_loss,
+                  loss = tf.keras.losses.Huber(delta=1),
+                  #loss = huber_loss,
                   #loss='mean_squared_error',
                   #loss='mean_absolute_error',
                   #loss='binary_crossentropy',# nicely blue
