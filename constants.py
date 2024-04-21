@@ -37,7 +37,8 @@
 #FEATURE_COLUMNS = ['dot_eyedir_sundir']
     
 #FEATURE_COLUMNS = [ "eyedirz","dot_eyedir_sundir", "altitude"]
-FEATURE_COLUMNS = [ "eyedirz","dot_eyedir_sundir", "altitude"]]
+#FEATURE_COLUMNS = [ "eyedirz","dot_eyedir_sundir", "altitude","angle"]
+FEATURE_COLUMNS = [ "orientw", "orientx", "orienty", "orientz","eyedirz","dot_eyedir_sundir", "altitude"]
 #FEATURE_COLUMNS = ["eyedirx","eyediry","eyedirz","dot_eyedir_sundir"]
 #FEATURE_COLUMNS = ["dot","dot_eyedir_sundir"]
 #FEATURE_COLUMNS = ["eyedirx", "eyediry", "eyedirz",'sundirx', 'sundiry', 'sundirz', "angle"]
