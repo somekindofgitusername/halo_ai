@@ -18,7 +18,9 @@ def initialize_tuner(tuner_selection, build_model, directory='tuner_results', pr
         print("Hyperband")
         tuner = Hyperband(
             build_model,
-            objective='val_mean_absolute_error',
+            #objective='val_mean_absolute_error',
+            objective = 'val_mean_squared_error',
+            #objective='val_loss',
             max_epochs=20,
             factor=3,
             directory=directory,
