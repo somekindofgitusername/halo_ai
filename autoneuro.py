@@ -15,11 +15,11 @@ from data_handling import save_model
 from reporting import print_evaluation_metrics
 from model import build_model
 from tuner_options import initialize_tuner
-from best_model import build_best_model
+from best_model import *
 
 
 # Constants for user interface
-TASK_PROMPT = "Train a model (1) or Refine an existing model(2)"
+TASK_PROMPT = "Train a model (1) or Refine an existing model(2): "
 TUNER_PROMPT = "Select a tuner:\n1. RandomSearch\n2. Hyperband\n3. BayesianOptimization\nEnter the number of your choice (default '1'): "
 DATA_PERCENTAGE_PROMPT = "Enter the percentage of data to use (1-100): "
 INVALID_INPUT_MESSAGE = "Invalid input. Defaulting to treating color components as separate features."
@@ -86,7 +86,7 @@ def main():
             best_model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=100, callbacks=[early_stopping, model_checkpoint])
     # Refine an existing model
     else:
-        best_model = build_best_model()
+        best_model = build_best_model2()
         best_model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=200)
 
     

@@ -16,7 +16,7 @@ def build_model(hp):
     model = Sequential()
     # Initial Dense layer to process the input features
     model.add(Dense(
-        units=hp.Int('initial_units', min_value=16, max_value=256, step=32),
+        units=hp.Int('initial_units', min_value=16, max_value=256, step=16),
         activation=hp.Choice('initial_activation', ['relu', 'tanh', 'elu']),
         kernel_initializer=HeNormal(),
         kernel_regularizer=l2(0.01),
