@@ -19,7 +19,7 @@ from best_model import *
 
 
 # Constants for user interface
-TASK_PROMPT = "Train a model (1) or Refine an existing model(2): "
+TASK_PROMPT = "Train a model (1) or Refine an existing model (2): "
 TUNER_PROMPT = "Select a tuner:\n1. RandomSearch\n2. Hyperband\n3. BayesianOptimization\nEnter the number of your choice (default '1'): "
 DATA_PERCENTAGE_PROMPT = "Enter the percentage of data to use (1-100): "
 INVALID_INPUT_MESSAGE = "Invalid input. Defaulting to treating color components as separate features."
