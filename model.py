@@ -16,21 +16,23 @@ def build_model(hp):
     model = Sequential()
     # Initial Dense layer to process the input features
     model.add(Dense(
-        units=hp.Int('initial_units', min_value=16, max_value=256, step=16),
+        units=hp.Int('initial_units', min_value=16, max_value=256, step=8),
         activation=hp.Choice('initial_activation', ['relu', 'tanh', 'elu']),
         kernel_initializer=HeNormal(),
-        kernel_regularizer=l2(0.01),
+        kernel_regularizer=l2(0.001),
+        #kernel_regularizer=l2( hp.Float('l2', min_value=0.001, max_value=0.1, step=0.001)),
         input_shape=(num_features,)
     ))
     model.add(BatchNormalization())  # Add batch normalization layer after the input layer
 
     # Add hidden layers
-    for i in range(hp.Int('n_layers', 4, 4)): # 4
+    for i in range(hp.Int('n_layers', 5, 5)): # 4
         model.add(Dense(
-            units=hp.Int(f'layer_{i}_units', min_value=16, max_value=256, step=16),
+            units=hp.Int(f'layer_{i}_units', min_value=16, max_value=256, step=8),
             activation=hp.Choice(f'layer_{i}_activation', ['relu', 'tanh', 'elu']),
             kernel_initializer=HeNormal(),
-            kernel_regularizer=l2(0.01),
+            #kernel_regularizer=l2( hp.Float('l2', min_value=0.001, max_value=0.1, step=0.001)),
+            kernel_regularizer=l2(0.001),
         ))
         model.add(BatchNormalization())
         model.add(Dropout(hp.Float(f'layer_{i}_dropout', min_value=0.05, max_value=0.5, step=0.05)))
@@ -46,8 +48,11 @@ def build_model(hp):
     )
     optimizer = Adam(learning_rate=lr_schedule)
     
+    delta = hp.Float('delta', min_value=0.1, max_value=5.0, step=0.1)
+    
     model.compile(optimizer=optimizer,
-                  loss=tf.keras.losses.Huber(delta=1.6),
+                  #loss=tf.keras.losses.Huber(delta=0.5),
+                  loss=tf.keras.losses.Huber(delta=delta),
                   metrics=['mean_absolute_error', 'mean_squared_error']
                  )
 
