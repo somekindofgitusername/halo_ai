@@ -110,8 +110,8 @@ def main():
                                 project_name='brightness_prediction'
                                 )
             tuner.search(X_train, y_train, 
-                    epochs=120, 
-                    validation_split=0.2, 
+                    epochs=155, 
+                    validation_split=0.132, 
                     verbose=1)
             tuner.results_summary()   
             # # Evaluate and save the best model

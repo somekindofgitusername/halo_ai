@@ -4,7 +4,7 @@ from tensorflow.keras.layers import Dense, Dropout, BatchNormalization
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.regularizers import l2
 from tensorflow.keras import backend as K
-from tensorflow.keras.initializers import HeNormal
+from tensorflow.keras.initializers import HeNormal, GlorotUniform, RandomNormal, LecunNormal, Orthogonal
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 
 from constants import FEATURE_COLUMNS, TARGET_COLUMNS
@@ -14,31 +14,43 @@ num_targets = len(TARGET_COLUMNS)
 
 def build_model(hp):
     model = Sequential()
+    # Allows choosing the kernel initializer
+    kernel_initializer = hp.Choice('kernel_initializer', ['he_normal', 'glorot_uniform', 'random_normal', 'lecun_normal', 'orthogonal'])
+    initializer_dict = {
+    'he_normal': HeNormal(),
+    'glorot_uniform': GlorotUniform(),
+    'random_normal': RandomNormal(),
+    'lecun_normal': LecunNormal(),
+    'orthogonal': Orthogonal()
+    }
     # Initial Dense layer to process the input features
     model.add(Dense(
         units=hp.Int('initial_units', min_value=16, max_value=256, step=8),
-        activation=hp.Choice('initial_activation', ['relu', 'tanh', 'elu']),
-        kernel_initializer=HeNormal(),
-        kernel_regularizer=l2(0.001),
+        activation=hp.Choice('initial_activation', ['relu', 'tanh', 'elu', 'sigmoid']),
+        #kernel_initializer=LecunNormal(),
+        kernel_initializer=initializer_dict[kernel_initializer],
+        #kernel_regularizer=l2(0.0001),
         #kernel_regularizer=l2( hp.Float('l2', min_value=0.001, max_value=0.1, step=0.001)),
         input_shape=(num_features,)
     ))
     model.add(BatchNormalization())  # Add batch normalization layer after the input layer
 
     # Add hidden layers
-    for i in range(hp.Int('n_layers', 5, 5)): # 4
+    for i in range(hp.Int('n_layers', 6, 6)): # 4
         model.add(Dense(
             units=hp.Int(f'layer_{i}_units', min_value=16, max_value=256, step=8),
-            activation=hp.Choice(f'layer_{i}_activation', ['relu', 'tanh', 'elu']),
-            kernel_initializer=HeNormal(),
+            activation=hp.Choice('initial_activation', ['relu', 'tanh', 'elu', 'sigmoid']),
+            #kernel_initializer=HeNormal(),
+            #kernel_initializer=LecunNormal(),
+            kernel_initializer=initializer_dict[kernel_initializer],
             #kernel_regularizer=l2( hp.Float('l2', min_value=0.001, max_value=0.1, step=0.001)),
-            kernel_regularizer=l2(0.001),
+            #kernel_regularizer=l2(0.0001),
         ))
-        model.add(BatchNormalization())
-        model.add(Dropout(hp.Float(f'layer_{i}_dropout', min_value=0.05, max_value=0.5, step=0.05)))
+        #model.add(BatchNormalization())
+        #model.add(Dropout(hp.Float(f'layer_{i}_dropout', min_value=0.05, max_value=0.5, step=0.05)))
 
     # Output layer
-    model.add(Dense(num_targets, activation='linear', kernel_initializer=HeNormal()))
+    model.add(Dense(num_targets, activation='linear', kernel_initializer=initializer_dict[kernel_initializer]))
 
     # Compile model with adaptive learning rate
     lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(
